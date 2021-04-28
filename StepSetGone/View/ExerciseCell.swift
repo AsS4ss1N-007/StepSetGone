@@ -25,24 +25,25 @@ class ExerciseCell: UICollectionViewCell {
         return image
     }()
     
-    fileprivate let exerciseNameLabel: UILabel = {
+    let exerciseNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
         label.numberOfLines = 0
         label.font = .boldSystemFont(ofSize: 20)
+        label.text = "Loading"
         return label
     }()
     
-    fileprivate let scoreLabel: UILabel = {
+    let scoreLabel: UILabel = {
         let label = UILabel()
-        label.text = "Heart rate"
+        label.text = "Loading"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
         label.numberOfLines = 0
-        label.font = .italicSystemFont(ofSize: 25)
+        label.font = UIFont(name: "Roboto-BoldItalic", size: 28)
         return label
     }()
     

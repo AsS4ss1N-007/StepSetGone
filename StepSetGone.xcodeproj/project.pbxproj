@@ -10,12 +10,12 @@
 		182A68D82639B556008E0D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68D72639B556008E0D3F /* AppDelegate.swift */; };
 		182A68DA2639B556008E0D3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68D92639B556008E0D3F /* SceneDelegate.swift */; };
 		182A68DC2639B556008E0D3F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68DB2639B556008E0D3F /* HomeViewController.swift */; };
-		182A68DF2639B556008E0D3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 182A68DD2639B556008E0D3F /* Main.storyboard */; };
 		182A68E12639B557008E0D3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 182A68E02639B557008E0D3F /* Assets.xcassets */; };
 		182A68E42639B557008E0D3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 182A68E22639B557008E0D3F /* LaunchScreen.storyboard */; };
 		182A68EF2639E0E3008E0D3F /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68EE2639E0E3008E0D3F /* ApiService.swift */; };
 		182A68F22639E22D008E0D3F /* FitnessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68F12639E22D008E0D3F /* FitnessModel.swift */; };
 		182A68FB2639EB58008E0D3F /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68FA2639EB58008E0D3F /* ExerciseCell.swift */; };
+		182A69002639ED83008E0D3F /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 182A68FF2639ED83008E0D3F /* Roboto-BoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,13 +23,13 @@
 		182A68D72639B556008E0D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		182A68D92639B556008E0D3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		182A68DB2639B556008E0D3F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		182A68DE2639B556008E0D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		182A68E02639B557008E0D3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		182A68E32639B557008E0D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		182A68E52639B557008E0D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		182A68EE2639E0E3008E0D3F /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		182A68F12639E22D008E0D3F /* FitnessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessModel.swift; sourceTree = "<group>"; };
 		182A68FA2639EB58008E0D3F /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
+		182A68FF2639ED83008E0D3F /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +46,7 @@
 		182A68CB2639B555008E0D3F = {
 			isa = PBXGroup;
 			children = (
+				182A68FF2639ED83008E0D3F /* Roboto-BoldItalic.ttf */,
 				182A68D62639B556008E0D3F /* StepSetGone */,
 				182A68D52639B556008E0D3F /* Products */,
 			);
@@ -68,7 +69,6 @@
 				182A68F62639E24D008E0D3F /* APIService */,
 				182A68F72639E25C008E0D3F /* Controller */,
 				182A68F92639EB2D008E0D3F /* View */,
-				182A68DD2639B556008E0D3F /* Main.storyboard */,
 				182A68E02639B557008E0D3F /* Assets.xcassets */,
 				182A68E22639B557008E0D3F /* LaunchScreen.storyboard */,
 				182A68E52639B557008E0D3F /* Info.plist */,
@@ -167,7 +167,7 @@
 			files = (
 				182A68E42639B557008E0D3F /* LaunchScreen.storyboard in Resources */,
 				182A68E12639B557008E0D3F /* Assets.xcassets in Resources */,
-				182A68DF2639B556008E0D3F /* Main.storyboard in Resources */,
+				182A69002639ED83008E0D3F /* Roboto-BoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,14 +190,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		182A68DD2639B556008E0D3F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				182A68DE2639B556008E0D3F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		182A68E22639B557008E0D3F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
