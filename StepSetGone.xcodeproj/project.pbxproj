@@ -15,6 +15,7 @@
 		182A68E42639B557008E0D3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 182A68E22639B557008E0D3F /* LaunchScreen.storyboard */; };
 		182A68EF2639E0E3008E0D3F /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68EE2639E0E3008E0D3F /* ApiService.swift */; };
 		182A68F22639E22D008E0D3F /* FitnessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68F12639E22D008E0D3F /* FitnessModel.swift */; };
+		182A68FB2639EB58008E0D3F /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A68FA2639EB58008E0D3F /* ExerciseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		182A68E52639B557008E0D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		182A68EE2639E0E3008E0D3F /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		182A68F12639E22D008E0D3F /* FitnessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessModel.swift; sourceTree = "<group>"; };
+		182A68FA2639EB58008E0D3F /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				182A68F42639E243008E0D3F /* Model */,
 				182A68F62639E24D008E0D3F /* APIService */,
 				182A68F72639E25C008E0D3F /* Controller */,
+				182A68F92639EB2D008E0D3F /* View */,
 				182A68DD2639B556008E0D3F /* Main.storyboard */,
 				182A68E02639B557008E0D3F /* Assets.xcassets */,
 				182A68E22639B557008E0D3F /* LaunchScreen.storyboard */,
@@ -95,6 +98,14 @@
 				182A68DB2639B556008E0D3F /* HomeViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		182A68F92639EB2D008E0D3F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				182A68FA2639EB58008E0D3F /* ExerciseCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 				182A68EF2639E0E3008E0D3F /* ApiService.swift in Sources */,
 				182A68DA2639B556008E0D3F /* SceneDelegate.swift in Sources */,
 				182A68F22639E22D008E0D3F /* FitnessModel.swift in Sources */,
+				182A68FB2639EB58008E0D3F /* ExerciseCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
