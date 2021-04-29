@@ -100,54 +100,47 @@ class HomeViewController: UIViewController {
     }
     
     private func getAuthorisations(){
-        let write = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
+        let healthKitTypes: Set = [
             
-        let read = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
-        
-        if let stepsCountIdentifierUnwrappedRead = read, let stepsCountIdentifierUnwrappedWrite = write {
-            let healthKitTypesToRead: Set = [stepsCountIdentifierUnwrappedRead]
-            let healthKitTypesToWrite: Set = [stepsCountIdentifierUnwrappedWrite]
-            healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: healthKitTypesToRead, completion: { (userWasShownPermissionView, error) in
-                
-                if (userWasShownPermissionView) {
-                    print("User was shown permission view")
-                    
-                    if (self.healthStore.authorizationStatus(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!) == .sharingAuthorized) {
-                        print("Permission Granted to Access")
-                        self.getTodaysSteps()
-                    } else {
-                        print("Permission Denied to Access")
-                    }
-                    
-                } else {
-                    print("User was not shown permission view")
-                    
-                    // An error occurred
-                    if let e = error {
-                        print(e)
-                    }
+            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!
+        ]
+        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { (_, _) in
+            print("Authorising")
+        }
+        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { (bool, error) in
+            if let e = error {
+                print("oops something went wrong during authorisation \(e.localizedDescription)")
+            } else {
+                print("User has completed the authorization process")
+                self.getTodaysSteps { (totalSteps) in
+                    self.steps = totalSteps
+                    self.walkHeartCV.reloadData()
                 }
-            })
+            }
         }
     }
     
-    private func getTodaysSteps(){
-        guard let sampleType = HKCategoryType.quantityType(forIdentifier: .stepCount) else {return}
-        let startDate = Calendar.current.startOfDay(for: Date())
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictEndDate)
-        var interval = DateComponents()
-        interval.day = 1
-        let query = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: predicate, options: [.cumulativeSum], anchorDate: startDate, intervalComponents: interval)
-        query.initialResultsHandler = {
-            query, result, error in
-            if let myResult = result{
-                myResult.enumerateStatistics(from: startDate, to: Date()) { (statics, value) in
-                    if let count = statics.sumQuantity(){
-                        let value = count.doubleValue(for: HKUnit.count())
-                        self.steps = value
-                        self.walkHeartCV.reloadData()
-                    }
-                }
+    private func getTodaysSteps(completion: @escaping (Double) -> Void) {
+        
+        let steps = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+        
+        let now = Date()
+        let startOfDay = Calendar.current.startOfDay(for: now)
+        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
+        
+        let query = HKStatisticsQuery(quantityType: steps, quantitySamplePredicate: predicate, options: .cumulativeSum) { (_, result, error) in
+            var resultCount = 0
+            guard let result = result else {
+                print("Failed to fetch steps")
+                completion(Double(resultCount))
+                return
+            }
+            if let sum = result.sumQuantity() {
+                resultCount = Int(sum.doubleValue(for: HKUnit.count()))
+            }
+            
+            DispatchQueue.main.async {
+                completion(Double(resultCount))
             }
         }
         healthStore.execute(query)

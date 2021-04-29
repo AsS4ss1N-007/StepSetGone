@@ -31,7 +31,6 @@
 		182A68F12639E22D008E0D3F /* FitnessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessModel.swift; sourceTree = "<group>"; };
 		182A68FA2639EB58008E0D3F /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		182A68FF2639ED83008E0D3F /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
-		182A690B263AAD1D008E0D3F /* StepSetGone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StepSetGone.entitlements; sourceTree = "<group>"; };
 		182A690D263AAD1E008E0D3F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -68,7 +67,6 @@
 		182A68D62639B556008E0D3F /* StepSetGone */ = {
 			isa = PBXGroup;
 			children = (
-				182A690B263AAD1D008E0D3F /* StepSetGone.entitlements */,
 				182A68D72639B556008E0D3F /* AppDelegate.swift */,
 				182A68D92639B556008E0D3F /* SceneDelegate.swift */,
 				182A68F42639E243008E0D3F /* Model */,
