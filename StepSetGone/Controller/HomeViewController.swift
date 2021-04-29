@@ -6,8 +6,10 @@
 //
 
 import UIKit
-
+import HealthKit
 class HomeViewController: UIViewController {
+    var steps: Double?
+    var healthStore = HKHealthStore()
     var exercisesScore: FitnessModel?
     fileprivate let greatDayLabel: UILabel = {
         let label = UILabel()
@@ -50,11 +52,13 @@ class HomeViewController: UIViewController {
         walkHeartCVLayout()
         sleepTrainCVLayout()
         setupDelegates()
+        getAuthorisations()
     }
     
     private func setupNavigationBar(){
         self.navigationItem.title = "Good Morning, Yash"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
     
     private func setupDelegates(){
@@ -94,6 +98,60 @@ class HomeViewController: UIViewController {
             self.sleepTrainCV.reloadData()
         }
     }
+    
+    private func getAuthorisations(){
+        let write = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
+            
+        let read = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
+        
+        if let stepsCountIdentifierUnwrappedRead = read, let stepsCountIdentifierUnwrappedWrite = write {
+            let healthKitTypesToRead: Set = [stepsCountIdentifierUnwrappedRead]
+            let healthKitTypesToWrite: Set = [stepsCountIdentifierUnwrappedWrite]
+            healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: healthKitTypesToRead, completion: { (userWasShownPermissionView, error) in
+                
+                if (userWasShownPermissionView) {
+                    print("User was shown permission view")
+                    
+                    if (self.healthStore.authorizationStatus(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!) == .sharingAuthorized) {
+                        print("Permission Granted to Access")
+                        self.getTodaysSteps()
+                    } else {
+                        print("Permission Denied to Access")
+                    }
+                    
+                } else {
+                    print("User was not shown permission view")
+                    
+                    // An error occurred
+                    if let e = error {
+                        print(e)
+                    }
+                }
+            })
+        }
+    }
+    
+    private func getTodaysSteps(){
+        guard let sampleType = HKCategoryType.quantityType(forIdentifier: .stepCount) else {return}
+        let startDate = Calendar.current.startOfDay(for: Date())
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictEndDate)
+        var interval = DateComponents()
+        interval.day = 1
+        let query = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: predicate, options: [.cumulativeSum], anchorDate: startDate, intervalComponents: interval)
+        query.initialResultsHandler = {
+            query, result, error in
+            if let myResult = result{
+                myResult.enumerateStatistics(from: startDate, to: Date()) { (statics, value) in
+                    if let count = statics.sumQuantity(){
+                        let value = count.doubleValue(for: HKUnit.count())
+                        self.steps = value
+                        self.walkHeartCV.reloadData()
+                    }
+                }
+            }
+        }
+        healthStore.execute(query)
+    }
 }
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -109,6 +167,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell.exerciseImage.image = #imageLiteral(resourceName: "pedestrian-man")
                 cell.exerciseNameLabel.text = "Walking Step Counter"
                 cell.progressBar.isHidden = false
+                if let steps = steps{
+                    cell.scoreLabel.text = "\(steps)"
+                }
             }else{
                 let color = UIColor(red: 255/255, green: 197/255, blue: 197/255, alpha: 1)
                 cell.setupGradient(color: color)
